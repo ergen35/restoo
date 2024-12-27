@@ -8,9 +8,11 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"pb:typegen": "pnpx pocketbase-typegen --db ../pocketbase/pb_data/data.db --out ./src/lib/server/pocketbase-types.ts"
 	},
 	"devDependencies": {
+		"@iconify/svelte": "^4.1.0",
 		"@sveltejs/adapter-node": "^5.2.11",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
@@ -25,6 +27,8 @@
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@tailwindcss/forms": "^0.5.9",
 		"@tailwindcss/typography": "^0.5.15",
+		"eventsource": "^3.0.2",
+		"moment": "^2.30.1",
 		"pocketbase": "^0.24.0"
 	}
 }
