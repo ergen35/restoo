@@ -1,7 +1,12 @@
 <script lang="ts">
+  import { page } from '$app/state';
     import type { PageData, ActionData } from './$types';
     import Icon from "@iconify/svelte";
+
     let { data, form }: { data: PageData, form: ActionData } = $props();
+
+    let email = page.url.searchParams.get('email');
+
 </script>
 
 
@@ -31,7 +36,7 @@
             {/if}
 
             <div class="mb-4 px-3 flex flex-col">
-                <input type="email" name="email" id="email" class="form-input" placeholder="Adresse e-mail">
+                <input type="email" name="email" id="email" value="{email ?? ''}" class="form-input" placeholder="Adresse e-mail">
             </div>
 
             <div class="mb-4 px-3 flex flex-col">
@@ -45,7 +50,7 @@
             </div>
 
             <div class="text-center w-full">
-                <span>Pas de compte ? <a href="/register" class="text-orange-500">Inscrivez-vous</a></span>
+                <span>Pas de compte ? <a href="/registration" class="text-orange-500">Inscrivez-vous</a></span>
             </div>
         </form>
     </div>

@@ -1,5 +1,7 @@
-import { fail, type Actions } from '@sveltejs/kit';
+import { fail, redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import Pocketbase from 'pocketbase';
+import type { TypedPocketBase } from '$lib/server/pocketbase-types';
 
 export const load = (async () => {
     return {};
@@ -7,7 +9,7 @@ export const load = (async () => {
 
 
 export const actions: Actions = {
-    default: async ({ request }) => {
+    default: async ({ request, locals: { pb, user } }) => {
 
         const formData = await request.formData();
         const { email, password } = {
@@ -21,5 +23,14 @@ export const actions: Actions = {
             })
         }
 
+        try {
+            const auth_result = await pb.collection("users").authWithPassword(email, password);
+            
+            if(auth_result.token){
+                redirect(302, "/")
+            }
+        } catch (error) {
+            
+        }
     }
 }
